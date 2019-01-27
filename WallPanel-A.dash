@@ -1,0 +1,231 @@
+#
+# Main arguments, all optional
+#
+title: Main Panel
+widget_dimensions: [115, 115]
+widget_margins: [5, 5]
+columns: 8
+#
+# Layout
+#    
+layout:
+    - clock(2x1), weather(2x2), outside_temperature, outside_humidity, trevor_presence, paul_presence
+    - utility_motion, office_motion, mbr_temp, urm_temp, mbr_motion, upstairs_hallway
+    - outside_on_scene,     outside_off_scene,           theater_on_scene,    theater_off_scene,  radar(2x2), upstairs_thermostat(2x1)  
+    - work_scene,   upstairs_led, entry_fan, entry_lights, downstairs_thermostat(2x1)
+    - home_panel, upstairs_panel, downstairs_panel, office_panel, outside_panel, alarm_panel, control_panel, reload
+    
+clock:
+    widget_type: clock
+
+weather:
+    widget_type: weather
+    units: "&deg;F"
+    
+outside_temperature:
+    widget_type: sensor
+    title: Shop Temp
+    units: "&deg;F"
+    precision: 1
+    entity: sensor.outside_temperature
+ 
+outside_humidity:
+    widget_type: sensor
+    title: Shop H20
+    units: "%"
+    precision: 0
+    entity: sensor.outside_humidity
+
+trevor_presence:
+    widget_type: device_tracker
+    title: Trevor
+    device: trevors_phone
+    icon_on: fa-male
+    icon_off: fa-male
+
+paul_presence:
+    widget_type: device_tracker
+    title: Paul
+    icon_on: fa-male
+    icon_off: fa-male
+    device: pixel3
+
+utility_motion:
+    widget_type: binary_sensor
+    title: Utility
+    entity: binary_sensor.dome_motion_detector_sensor
+
+office_motion:
+    widget_type: binary_sensor
+    title: Office
+    entity: binary_sensor.dome_motion_detector_sensor_2
+
+light_level:
+    widget_type: sensor
+    title: Bedroom LUX
+    units: "lux"
+    precision: 0
+    shorten: 1
+    entity: sensor.dome_motion_detector_luminance_3
+        
+mbr_motion:
+    widget_type: binary_sensor
+    title: MBR
+    entity: binary_sensor.dome_motion_detector_sensor_3
+
+upstairs_hallway:
+    widget_type: switch
+    title: Hallway
+    entity: switch.switch_7
+    icon_on: mdi-lightbulb-on-outline
+    icon_off: mdi-lightbulb-outline
+    
+outside_on_scene:
+    widget_type: scene
+    title: Outside On
+    entity: scene.outside_on
+    icon_on: mdi-pine-tree
+    icon_off: mdi-pine-tree
+
+outside_off_scene:
+    widget_type: scene
+    title: Outside Off
+    entity: scene.outside_off
+    icon_on: mdi-pine-tree-box
+    icon_off: mdi-pine-tree-box
+
+theater_on_scene:
+    widget_type: scene
+    title: Theater On
+    entity: scene.theater_on
+    icon_on: mdi-television
+    icon_off: mdi-television
+
+theater_off_scene:
+    widget_type: scene
+    title: Theater Off
+    entity: scene.theater_off
+    icon_on: mdi-television-off
+    icon_off: mdi-television-off
+
+urm_temp:
+    widget_type: sensor
+    title: Utility
+    units: "&deg;F"
+    precision: 1
+    entity: sensor.urm_temperature
+
+mbr_temp:
+    widget_type: sensor
+    title: MBR
+    units: "&deg;F"
+    precision: 1
+    entity: sensor.mbr_temperature
+    
+radar:
+    widget_type: iframe
+    title: Radar
+    refresh: 30
+    img_list:
+      - https://cdn.star.nesdis.noaa.gov/GOES16/ABI/GIFS/GOES16-EUS-13-1000x1000.gif
+      - https://cdn.star.nesdis.noaa.gov/GOES16/ABI/GIFS/GOES16-EUS-GEOCOLOR-1000x1000.gif
+      - https://radblast.wunderground.com/cgi-bin/radar/WUNIDS_map?station=BOX&brand=wui&num=8&delay=30&type=N0R&frame=0&scale=1.000&noclutter=1&showstorms=1&mapx=240&mapy=240&centerx=240&centery=240&transx=0&transy=0&showlabels=1&severe=0&rainsnow=0&lightning=0&smooth=0&rand=24330421&lat=0&lon=0&label=you
+    
+basement_thermometer:
+    widget_type: sensor
+    title: Basement
+    units: "&deg;F"
+    precision: 0
+    entity: sensor.basement_thermometer
+
+upstairs_thermostat:
+    widget_type: climate
+    title: Upstairs Thermostat
+    units: "&deg;F"
+    precision: 1
+    entity: climate.2gig_technologies_ct100_thermostat_usa_heating_1
+
+downstairs_thermostat:
+    widget_type: climate
+    title: Downstairs Thermostat
+    units: "&deg;F"
+    precision: 1
+    entity: climate.2gig_technologies_ct101_thermostat_iris_heating_1
+
+work_scene:
+    widget_type: scene
+    title: Work Commute
+    icon_on: mdi-car-pickup
+    icon_off: mdi-car-pickup
+    entity: scene.work
+
+upstairs_led:
+    widget_type: light
+    title: Upstairs LED
+    entity: light.upstairs_led
+    icon_style_active: "color: red"
+    icon_on: mdi-led-on
+    icon_off: mdi-led-outline
+    on_attributes:
+        brightness: 255
+        rgb_color: 255, 0, 0
+
+entry_fan:
+    widget_type: switch
+    title: Entry Fan
+    entity: switch.switch_9
+    icon_on: mdi-fan
+    icon_off: mdi-fan-off
+    
+entry_lights:
+    widget_type: switch
+    title: Entry Lights
+    entity: light.entry
+    icon_on: mdi-lightbulb-on-outline
+    icon_off: mdi-lightbulb-outline
+
+home_panel:
+    widget_type: navigate
+    title: Home
+    icon: fa-home
+    url: /WallPanel-A
+
+upstairs_panel:
+    widget_type: navigate
+    title: Upstairs
+    icon: fa-windows
+    url: /Upstairs
+
+downstairs_panel:
+    widget_type: navigate
+    title: Downstairs
+    icon: fa-bed
+    url: /Downstairs
+
+office_panel:
+    widget_type: navigate
+    title: Office
+    icon: fa-tv
+    url: /Office
+
+outside_panel:
+    widget_type: navigate
+    title: Outside
+    icon: fa-twitter
+    url: /Outside
+
+alarm_panel:
+    widget_type: navigate
+    title: Alarm 
+    icon: fa-lock
+    url: /Alarm
+
+control_panel:
+    widget_type: navigate
+    title: Controls
+    icon: fa-dashboard
+    url: /Controls
+    
+reload:
+    widget_type: reload
+    title: Reload
